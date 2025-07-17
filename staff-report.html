@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIS Dashboard - Staff Performance Report</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>Individual Staff Performance Report</h1>
 
         <div class="report-controls">
+            <label for="monthSelect">Select Month:</label>
+            <select id="monthSelect">
+                <option value="July2025" selected>July 2025 (Cumulative/Till Date)</option>
+                <option value="August2025">August 2025 (Future Data)</option>
+                <option value="September2025">September 2025 (Future Data)</option>
+                <option value="October2025">October 2025 (Future Data)</option>
+                <option value="November2025">November 2025 (Future Data)</option>
+                <option value="December2025">December 2025 (Future Data)</option>
+            </select>
+
             <label for="companySelect">Select Company:</label>
             <select id="companySelect">
                 <option value="">-- Select Company --</option>
@@ -24,7 +35,8 @@
         <div id="staffReport" class="report-output">
             <h2>Staff Performance Details</h2>
             <p id="reportStaffName">No staff selected.</p>
-            <p id="reportOutstanding">Out standing: N/A</p> <table id="staffDetailsTable">
+            <p id="reportOutstanding">Out standing: N/A</p>
+            <table id="staffDetailsTable">
                 <thead>
                     <tr>
                         <th>Metric</th>
@@ -64,5 +76,6 @@
         </div>
 
     </div>
-    <script src="staff-report.js"></script> </body>
+    <script src="staff-report.js"></script>
+</body>
 </html>
