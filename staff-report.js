@@ -4,13 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadingSpinner = document.getElementById('loading');
     const errorMessageDiv = document.getElementById('error-message');
+    const monthSelect = document.getElementById('monthSelect'); // New month select element
     const companySelect = document.getElementById('companySelect');
     const staffSearchInput = document.getElementById('staffSearch');
     const staffSuggestionsDiv = document.getElementById('staffSuggestions');
     const reportStaffName = document.getElementById('reportStaffName');
-    const reportOutstanding = document.getElementById('reportOutstanding'); // New reference for Out standing
+    const reportOutstanding = document.getElementById('reportOutstanding');
 
-    // Table detail elements (removed OS related ones)
+    // Table detail elements
     const foreignTripContestTarget = document.getElementById('foreignTripContestTarget');
     const foreignTripContestAchievement = document.getElementById('foreignTripContestAchievement');
     const foreignTripContestShortfall = document.getElementById('foreignTripContestShortfall');
@@ -31,10 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const ORIGINAL_INDEX_FOREIGN_TRIP_FRESH_CUSTOMER_TARGET = 7; // Fresh customer Target
     const ORIGINAL_INDEX_DOMESTIC_TRIP_CONTEST_TARGET = 8;
     const ORIGINAL_INDEX_CONTEST_TOTAL_NET = 17; // Achievement for contest targets
-    const ORIGINAL_INDEX_FRESH_CUSTOMER_ACH_TOTAL = 11; // Achievement for fresh customer target
+    const ORIGINAL_INDEX_FRESH_CUSTOMER_ACH_TOTAL = 11; // Achievement for fresh customer target (Column L)
 
     let allParsedData = []; // Stores all data rows from CSV
-    let currentFilteredStaff = []; // Stores staff names filtered by company
 
     async function fetchDataAndSetupUI() {
         loadingSpinner.style.display = 'block';
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
             if (rows.length > 0) {
-                allParsedData = rows.slice(1); // Store all data rows (skipping CSV header)
+                allParsedData = rows.slice(1);
                 const uniqueCompanies = new Set();
 
                 allParsedData.forEach(row => {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function clearReport() {
         reportStaffName.textContent = "No staff selected.";
-        reportOutstanding.textContent = "Out standing: N/A"; // Clear Out standing
+        reportOutstanding.textContent = "Out standing: N/A";
         [foreignTripContestTarget, foreignTripContestAchievement, foreignTripContestShortfall,
          domesticTripContestTarget, domesticTripContestAchievement, domesticTripContestShortfall,
          freshCustomerTarget, freshCustomerAchievement, freshCustomerShortfall
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Autocomplete Logic ---
     companySelect.addEventListener('change', () => {
-        staffSearchInput.value = ''; // Clear staff search on company change
+        staffSearchInput.value = '';
         staffSuggestionsDiv.style.display = 'none';
         clearReport();
     });
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     staffSearchInput.addEventListener('input', () => {
         const query = staffSearchInput.value.toLowerCase();
         const selectedCompany = companySelect.value;
-        staffSuggestionsDiv.innerHTML = ''; // Clear previous suggestions
+        staffSuggestionsDiv.innerHTML = '';
 
         if (query.length < 1 || !selectedCompany) {
             staffSuggestionsDiv.style.display = 'none';
@@ -133,14 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (filteredStaff.length > 0) {
-            filteredStaff.slice(0, 10).forEach(staffRow => { // Limit suggestions to 10
+            filteredStaff.slice(0, 10).forEach(staffRow => {
                 const staffName = staffRow[ORIGINAL_INDEX_STAFF_NAME];
                 const div = document.createElement('div');
                 div.textContent = staffName;
                 div.addEventListener('click', () => {
                     staffSearchInput.value = staffName;
                     staffSuggestionsDiv.style.display = 'none';
-                    generateStaffReport(staffRow); // Generate report for selected staff
+                    generateStaffReport(staffRow);
                 });
                 staffSuggestionsDiv.appendChild(div);
             });
@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hide suggestions when clicking outside
     document.addEventListener('click', (event) => {
         if (!staffSearchInput.contains(event.target) && !staffSuggestionsDiv.contains(event.target)) {
             staffSuggestionsDiv.style.display = 'none';
@@ -159,10 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Report Generation Logic ---
     function generateStaffReport(staffRow) {
-        reportStaffName.textContent = `Report for: ${staffRow[ORIGINAL_INDEX_STAFF_NAME]} (${staffRow[ORIGINAL_INDEX_COMPANY_NAME]})`;
+        const selectedMonthText = monthSelect.options[monthSelect.selectedIndex].text;
+        reportStaffName.textContent = `Report for: ${staffRow[ORIGINAL_INDEX_STAFF_NAME]} (${staffRow[ORIGINAL_INDEX_COMPANY_NAME]}) - Data for ${selectedMonthText}`;
 
-        // Helper to parse float values, handling commas and empty strings
-        const parseValue = (value) => parseFloat(String(value).replace(/,/g, '')) || 0;
+        // Removed temporary console logs from parseValue, assuming they've served their purpose
+        const parseValue = (value) => {
+            const cleanedValue = String(value).replace(/,/g, '').trim();
+            const parsedNum = parseFloat(cleanedValue);
+            return isNaN(parsedNum) ? 0 : parsedNum;
+        };
 
         const osAsOn = parseValue(staffRow[ORIGINAL_INDEX_OS_AS_ON]);
         const foreignTripContestTargetVal = parseValue(staffRow[ORIGINAL_INDEX_FOREIGN_TRIP_CONTEST_TARGET]);
@@ -171,29 +175,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const contestTotalNetAch = parseValue(staffRow[ORIGINAL_INDEX_CONTEST_TOTAL_NET]);
         const freshCustomerAchTotal = parseValue(staffRow[ORIGINAL_INDEX_FRESH_CUSTOMER_ACH_TOTAL]);
 
-
-        // Out standing (now in the name panel)
         reportOutstanding.textContent = `Out standing: ${osAsOn.toLocaleString()}`;
 
-
-        // Foreign Trip Contest Target
         foreignTripContestTarget.textContent = foreignTripContestTargetVal.toLocaleString();
         foreignTripContestAchievement.textContent = contestTotalNetAch.toLocaleString();
+        // CORRECTED TYPO HERE: foreignTripContestTargetTargetVal -> foreignTripContestTargetVal
         const ftcShortfall = foreignTripContestTargetVal - contestTotalNetAch;
         foreignTripContestShortfall.textContent = ftcShortfall > 0 ? ftcShortfall.toLocaleString() : 'Met/Exceeded';
 
-        // Domestic Trip Contest Target (display if applicable)
         domesticTripContestTarget.textContent = domesticTripContestTargetVal > 0 ? domesticTripContestTargetVal.toLocaleString() : 'Not Applicable';
         domesticTripContestAchievement.textContent = domesticTripContestTargetVal > 0 ? contestTotalNetAch.toLocaleString() : 'N/A';
         const dtcShortfall = domesticTripContestTargetVal - contestTotalNetAch;
         domesticTripContestShortfall.textContent = domesticTripContestTargetVal > 0 ? (dtcShortfall > 0 ? dtcShortfall.toLocaleString() : 'Met/Exceeded') : 'N/A';
 
-        // Fresh Customer Target
         freshCustomerTarget.textContent = foreignTripFreshCustomerTargetVal.toLocaleString();
         freshCustomerAchievement.textContent = freshCustomerAchTotal.toLocaleString();
         const fctShortfall = foreignTripFreshCustomerTargetVal - freshCustomerAchTotal;
         freshCustomerShortfall.textContent = fctShortfall > 0 ? fctShortfall.toLocaleString() : 'Met/Exceeded';
     }
 
-    fetchDataAndSetupUI(); // Initial fetch on page load for the report page
+    monthSelect.addEventListener('change', () => {
+        const selectedStaffName = staffSearchInput.value;
+        const selectedCompany = companySelect.value;
+        if (selectedStaffName && selectedCompany) {
+            const staffRow = allParsedData.find(row =>
+                row[ORIGINAL_INDEX_STAFF_NAME] === selectedStaffName &&
+                row[ORIGINAL_INDEX_COMPANY_NAME] === selectedCompany
+            );
+            if (staffRow) {
+                generateStaffReport(staffRow);
+            }
+        }
+    });
+
+    fetchDataAndSetupUI();
 });
