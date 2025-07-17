@@ -1,55 +1,129 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif; /* Use Poppins for a modern look */
     margin: 0;
-    padding: 20px;
-    background-color: #f4f7f6;
+    padding: 0; /* Remove default padding as container handles it */
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Subtle gradient background */
     color: #333;
+    line-height: 1.6;
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 30px auto; /* Add some top/bottom margin */
     background-color: #ffffff;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Stronger, softer shadow */
 }
 
-h1 {
+/* Dashboard Header */
+.dashboard-header {
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 40px;
+    background-color: #007bff; /* Primary blue for header */
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.dashboard-header h1 {
+    font-size: 2.8em; /* Larger main title */
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.dashboard-header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* Navigation Cards */
+.navigation-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Space between cards */
+    margin-bottom: 50px;
+}
+
+.card {
+    background-color: #f8fafd;
+    border: 1px solid #e0e6ed;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    flex: 1; /* Allow cards to grow */
+    min-width: 280px; /* Minimum width before wrapping */
+    max-width: 45%; /* Max width for two columns */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    color: #0056b3;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.section-title {
     text-align: center;
     color: #0056b3;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    font-size: 2em;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e6ed;
+    padding-bottom: 10px;
 }
 
-/* New Styles for Report Controls and Output */
+
+/* Report Controls and Output (common to report pages) */
 .report-controls {
     margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    display: flex; /* Make it a flex container */
-    flex-wrap: wrap; /* Allow items to wrap to next line */
+    padding: 20px;
+    border: 1px solid #cce5ff;
+    border-radius: 8px;
+    background-color: #e6f3ff;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 10px; /* Spacing between items */
-    position: relative; /* For autocomplete positioning */
+    gap: 15px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.1);
 }
 
 .report-controls label {
     font-weight: bold;
-    flex-basis: 100%; /* Labels take full width on small screens */
+    color: #0056b3;
+    flex-basis: 100%;
     margin-bottom: 5px;
+    font-size: 1.05em;
 }
 
 .report-controls select,
 .report-controls input[type="text"],
 .report-controls button {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 10px 15px;
+    border: 1px solid #9bc9ff; /* Softer blue border */
+    border-radius: 6px;
     font-size: 1em;
-    flex-grow: 1; /* Allow inputs/selects to grow */
-    min-width: 150px; /* Minimum width before wrapping */
+    flex-grow: 1;
+    min-width: 160px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .report-controls button {
@@ -57,33 +131,35 @@ h1 {
     color: white;
     cursor: pointer;
     border-color: #007bff;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .report-controls button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 /* Autocomplete Suggestions */
 .autocomplete-suggestions {
     position: absolute;
-    top: 100%; /* Position below the input */
-    left: 0; /* Align with input start */
-    right: 0; /* Span full width of report-controls */
-    z-index: 100; /* Ensure it's above other content */
+    top: calc(100% + 5px); /* Position slightly below the input */
+    left: 0;
+    right: 0;
+    z-index: 100;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
     max-height: 200px;
     overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none; /* Hidden by default */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: none;
 }
 
 .autocomplete-suggestions div {
-    padding: 10px 12px;
+    padding: 10px 15px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
+    font-size: 1em;
 }
 
 .autocomplete-suggestions div:last-child {
@@ -95,96 +171,89 @@ h1 {
 }
 
 .report-output {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 25px;
+    padding: 25px;
     border: 1px solid #cce5ff;
-    border-left: 5px solid #007bff;
-    border-radius: 5px;
+    border-left: 6px solid #007bff;
+    border-radius: 10px;
     background-color: #e6f3ff;
     margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
 }
 
 .report-output h2 {
     color: #0056b3;
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 1.5em;
+    font-size: 1.8em;
+    font-weight: 600;
 }
 
 .report-output p {
-    margin-bottom: 8px;
-    font-size: 1.1em;
+    margin-bottom: 10px;
+    font-size: 1.15em;
+    color: #333;
 }
 
 .report-output p span {
-    font-weight: bold;
-    color: #333;
+    font-weight: 700; /* Bolder numbers */
+    color: #0056b3;
 }
 
 /* Table styles within report-output */
 #staffDetailsTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 #staffDetailsTable th,
 #staffDetailsTable td {
-    border: 1px solid #cce5ff; /* Use a lighter blue border for internal table */
-    padding: 8px 10px;
+    border: 1px solid #b3d7ff; /* Slightly darker blue border for internal table */
+    padding: 12px 15px;
     text-align: left;
     white-space: nowrap;
 }
 
 #staffDetailsTable th {
-    background-color: #007bff; /* Match report header blue */
+    background-color: #007bff;
     color: white;
-    font-weight: bold;
-    font-size: 0.9em;
+    font-weight: 600;
+    font-size: 1em;
+    text-transform: uppercase;
 }
 
 #staffDetailsTable tbody tr:nth-child(even) {
-    background-color: #e6f3ff; /* Lighter background for even rows */
+    background-color: #f0f7ff; /* Lighter background for even rows */
 }
 
 #staffDetailsTable tbody tr:hover {
-    background-color: #d1eaff; /* Slightly darker on hover */
+    background-color: #dbeaff; /* Slightly darker on hover */
 }
 
 
-/* Styles for the new "Go to Report" buttons on index.html */
-.main-page-controls {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.main-page-controls p {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
+/* General Report Button (used on index.html) */
 .report-button {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 14px 30px;
     background-color: #28a745; /* Green color */
     color: white;
     text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: background-color 0.2s ease;
-    margin: 5px 10px; /* Spacing between buttons */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.15em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 10px;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
 .report-button:hover {
     background-color: #218838;
+    transform: translateY(-3px);
 }
 
-/* Style for the "Back to Main Dashboard" link on report pages */
+/* Back Link */
 .back-link {
     margin-top: 30px;
     text-align: center;
@@ -193,58 +262,64 @@ h1 {
 .back-link a {
     color: #007bff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: color 0.2s ease;
 }
 
 .back-link a:hover {
     text-decoration: underline;
+    color: #0056b3;
 }
 
 /* Existing Table Styles (for main table on index.html) */
 .table-container {
-    overflow-x: auto; /* Enables horizontal scrolling for the table */
+    overflow-x: auto;
+    margin-top: 40px; /* More space from navigation */
+    border-radius: 8px; /* Match container style */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Add shadow to table */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    /* margin-top removed as container has it */
 }
 
 table th,
 table td {
-    border: 1px solid #ddd;
-    padding: 10px 12px;
+    border: 1px solid #e0e6ed; /* Lighter border for main table */
+    padding: 12px 15px;
     text-align: left;
-    white-space: nowrap; /* Prevent text wrapping in cells */
+    white-space: nowrap;
 }
 
 table th {
     background-color: #007bff;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-size: 0.95em;
 }
 
 table tr:nth-child(even) {
-    background-color: #f8f8f8;
+    background-color: #f8fafd;
 }
 
 table tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f1f5fa;
 }
 
 /* Loading Spinner */
 .loading-spinner {
-    border: 8px solid #f3f3f3; /* Light grey */
-    border-top: 8px solid #3498db; /* Blue */
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;
     margin: 50px auto;
-    display: none; /* Hidden by default */
+    display: none;
 }
 
 @keyframes spin {
@@ -254,12 +329,12 @@ table tr:hover {
 
 /* Error Message */
 .error-message {
-    color: #d9534f; /* Red */
+    color: #d9534f;
     background-color: #fdd;
     border: 1px solid #fbc;
     padding: 15px;
     margin-top: 20px;
     border-radius: 5px;
     text-align: center;
-    display: none; /* Hidden by default */
+    display: none;
 }
