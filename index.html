@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIS Dashboard - Staff Performance</title>
+    <title>Staff Performance Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Staff Performance Dashboard</h1>
+        <header class="dashboard-header">
+            <h1>MIS Dashboard</h1>
+            <p>Staff Performance & Contest Overview</p>
+        </header>
 
-        <div class="main-page-controls">
-            <p>View company-wise aggregated reports:</p>
-            <a href="company-report.html" class="report-button">Go to Company Report</a>
-            <p>View individual staff performance reports:</p>
-            <a href="staff-report.html" class="report-button">Go to Staff Report</a>
-        </div>
+        <section class="navigation-cards">
+            <div class="card">
+                <h2>Company-wise Aggregated Reports</h2>
+                <p>View total net growth, staff participation, and target achievement by company.</p>
+                <a href="company-report.html" class="report-button">Go to Company Report</a>
+            </div>
+            <div class="card">
+                <h2>Individual Staff Performance Reports</h2>
+                <p>Search for specific staff to view their targets, achievements, and shortfalls.</p>
+                <a href="staff-report.html" class="report-button">Go to Staff Report</a>
+            </div>
+        </section>
 
+        <h2 class="section-title">All Staff Data (Cumulative)</h2>
         <div id="loading" class="loading-spinner"></div>
         <div id="error-message" class="error-message"></div>
 
