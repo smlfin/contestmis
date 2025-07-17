@@ -1,340 +1,501 @@
+/* --- Universal Styles --- */
 body {
-    font-family: 'Poppins', Arial, sans-serif; /* Use Poppins for a modern look */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
-    padding: 0; /* Remove default padding as container handles it */
-    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Subtle gradient background */
-    color: #333;
+    padding: 15px;
+    background-color: #f8f9fa;
+    color: #343a40;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 30px auto; /* Add some top/bottom margin */
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px; /* More rounded corners */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Stronger, softer shadow */
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box; /* Ensures padding doesn't add to max-width */
 }
 
-/* Dashboard Header */
-.dashboard-header {
+h1, h2, h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+    font-weight: 600;
     text-align: center;
-    padding: 20px 0;
-    margin-bottom: 40px;
-    background-color: #007bff; /* Primary blue for header */
-    color: white;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* --- Dashboard Header (index.html) --- */
+.dashboard-header {
+    background-color: #ffffff;
+    padding: 25px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 .dashboard-header h1 {
-    font-size: 2.8em; /* Larger main title */
     margin-bottom: 5px;
-    font-weight: 700;
 }
-
 .dashboard-header p {
-    font-size: 1.2em;
-    opacity: 0.9;
+    font-size: 1.1em;
+    color: #6c757d;
 }
 
-/* Navigation Cards */
+/* --- Navigation Cards (index.html) --- */
 .navigation-cards {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
-    gap: 30px; /* Space between cards */
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
-.card {
-    background-color: #f8fafd;
-    border: 1px solid #e0e6ed;
-    border-radius: 10px;
+.navigation-cards .card {
+    background-color: #ffffff;
     padding: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    flex: 1; /* Allows cards to grow and shrink */
+    min-width: 280px; /* Minimum width for cards before wrapping */
+    max-width: 45%; /* Max width to allow two cards per row on larger screens */
     text-align: center;
-    flex: 1; /* Allow cards to grow */
-    min-width: 280px; /* Minimum width before wrapping */
-    max-width: 45%; /* Max width for two columns */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.card:hover {
-    transform: translateY(-8px); /* Lift effect on hover */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.card h2 {
+.navigation-cards .card h2 {
     color: #0056b3;
-    font-size: 1.8em;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.card p {
-    font-size: 1.1em;
+.navigation-cards .card p {
+    font-size: 1em;
     color: #555;
-    margin-bottom: 25px;
+    flex-grow: 1; /* Ensures content pushes button to bottom */
+}
+
+.report-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px; /* Space between paragraph and button */
+    transition: background-color 0.3s ease;
+}
+
+.report-button:hover {
+    background-color: #0056b3;
 }
 
 .section-title {
-    text-align: center;
-    color: #0056b3;
-    margin-top: 40px;
-    margin-bottom: 25px;
-    font-size: 2em;
-    font-weight: 600;
-    border-bottom: 2px solid #e0e6ed;
-    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #343a40;
 }
 
-
-/* Report Controls and Output (common to report pages) */
+/* --- Report Controls Section (staff-report.html, company-report.html) --- */
 .report-controls {
-    margin-bottom: 20px;
+    background-color: #ffffff;
     padding: 20px;
-    border: 1px solid #cce5ff;
     border-radius: 8px;
-    background-color: #e6f3ff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 15px;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.1);
+    align-items: flex-end;
+}
+
+.report-controls > div { /* Added wrapper for label/input groups if HTML uses them */
+    flex: 1; /* Allow each control group to take equal space */
+    min-width: 200px; /* Minimum width before wrapping */
 }
 
 .report-controls label {
-    font-weight: bold;
-    color: #0056b3;
-    flex-basis: 100%;
+    display: block;
     margin-bottom: 5px;
-    font-size: 1.05em;
+    font-weight: 600;
+    color: #495057;
 }
 
 .report-controls select,
-.report-controls input[type="text"],
-.report-controls button {
-    padding: 10px 15px;
-    border: 1px solid #9bc9ff; /* Softer blue border */
-    border-radius: 6px;
+.report-controls input[type="text"] {
+    width: 100%; /* Take full width of its container */
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
     font-size: 1em;
-    flex-grow: 1;
-    min-width: 160px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    line-height: 1.5;
+    background-color: #e9ecef;
 }
 
-.report-controls button {
-    background-color: #007bff;
+.report-controls button#generateReportBtn {
+    background-color: #28a745; /* Green color for generate button */
     color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    border-color: #007bff;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* Prevents button from shrinking */
+    margin-top: 25px; /* Align with input fields */
 }
 
-.report-controls button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+.report-controls button#generateReportBtn:hover {
+    background-color: #218838;
 }
 
-/* Autocomplete Suggestions */
+.report-controls select:focus,
+.report-controls input[type="text"]:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Autocomplete Suggestions (staff-report.html) */
 .autocomplete-suggestions {
-    position: absolute;
-    top: calc(100% + 5px); /* Position slightly below the input */
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #ced4da;
+    border-top: none;
     max-height: 200px;
     overflow-y: auto;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    display: none;
+    background-color: white;
+    position: absolute;
+    width: calc(100% - 30px); /* Adjust based on container padding */
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border-radius: 0 0 5px 5px;
 }
-
 .autocomplete-suggestions div {
     padding: 10px 15px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
-    font-size: 1em;
 }
-
 .autocomplete-suggestions div:last-child {
     border-bottom: none;
 }
-
 .autocomplete-suggestions div:hover {
     background-color: #f0f0f0;
 }
 
-.report-output {
-    margin-top: 25px;
-    padding: 25px;
-    border: 1px solid #cce5ff;
-    border-left: 6px solid #007bff;
-    border-radius: 10px;
-    background-color: #e6f3ff;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
-}
 
-.report-output h2 {
-    color: #0056b3;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.8em;
-    font-weight: 600;
+/* --- Report Output Sections (staff-report.html, company-report.html) --- */
+.report-output {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
 }
 
 .report-output p {
-    margin-bottom: 10px;
-    font-size: 1.15em;
-    color: #333;
+    margin-bottom: 8px;
+    font-size: 1.1em;
 }
 
 .report-output p span {
-    font-weight: 700; /* Bolder numbers */
-    color: #0056b3;
+    font-weight: 700; /* Made numbers bold */
+    color: #007bff;
 }
 
-/* Table styles within report-output */
-#staffDetailsTable {
+/* --- Table Styles (index.html, staff-report.html - General) --- */
+/* Wrapper for horizontal scrolling (applied to #misTable) */
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background-color: #ffffff; /* Background for the scrollable area */
+}
+
+/* Base table styles for both */
+#misTable, #staffDetailsTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    min-width: 700px; /* Ensures tables are wide enough to trigger scroll on desktop */
+    font-size: 0.95em;
 }
 
-#staffDetailsTable th,
-#staffDetailsTable td {
-    border: 1px solid #b3d7ff; /* Slightly darker blue border for internal table */
-    padding: 12px 15px;
+#misTable th, #staffDetailsTable th,
+#misTable td, #staffDetailsTable td {
+    border: 1px solid #dee2e6;
+    padding: 12px;
     text-align: left;
-    white-space: nowrap;
+    white-space: nowrap; /* Prevents text wrapping, forcing horizontal scroll on desktop */
 }
 
-#staffDetailsTable th {
-    background-color: #007bff;
-    color: white;
+#misTable thead th, #staffDetailsTable thead th {
+    background-color: #e9ecef;
     font-weight: 600;
-    font-size: 1em;
-    text-transform: uppercase;
+    color: #495057;
+    position: sticky;
+    left: 0; /* Make header sticky if scrolled horizontally */
+    z-index: 2; /* Ensure headers are above body content */
 }
 
-#staffDetailsTable tbody tr:nth-child(even) {
-    background-color: #f0f7ff; /* Lighter background for even rows */
+/* Specific styling for the first column to be sticky */
+#misTable tbody tr td:first-child { /* Only for MIS Table */
+    position: sticky;
+    left: 0;
+    background-color: #f8f9fa;
+    font-weight: 500;
+    z-index: 1; /* Ensure sticky column is above other body cells */
 }
 
-#staffDetailsTable tbody tr:hover {
-    background-color: #dbeaff; /* Slightly darker on hover */
+/* Specific styling for the second column (COMPANY NAME in misTable) */
+#misTable tbody tr td:nth-child(2) {
+    background-color: #f2f4f6; /* Slightly different background for visual separation */
+    font-weight: normal;
 }
 
 
-/* General Report Button (used on index.html) */
-.report-button {
-    display: inline-block;
-    padding: 14px 30px;
-    background-color: #28a745; /* Green color */
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1.15em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 10px;
-    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
-}
-
-.report-button:hover {
-    background-color: #218838;
-    transform: translateY(-3px);
-}
-
-/* Back Link */
-.back-link {
-    margin-top: 30px;
+/* --- Loading & Error Messages --- */
+.loading-spinner, .error-message {
     text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    color: #6c757d;
+    display: none; /* Hidden by default, shown by JS */
+}
+.error-message {
+    color: #dc3545;
 }
 
+/* --- Back Link --- */
+.back-link {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
 .back-link a {
     color: #007bff;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1em;
-    transition: color 0.2s ease;
 }
-
 .back-link a:hover {
     text-decoration: underline;
-    color: #0056b3;
 }
 
-/* Existing Table Styles (for main table on index.html) */
-.table-container {
-    overflow-x: auto;
-    margin-top: 40px; /* More space from navigation */
-    border-radius: 8px; /* Match container style */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Add shadow to table */
+/* --- Media Queries for Mobile Screens --- */
+
+/* For screens smaller than 768px (common tablets in portrait, larger phones) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    h2 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    h3 {
+        font-size: 1.1em;
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    /* Navigation cards become full width */
+    .navigation-cards .card {
+        max-width: 100%;
+    }
+
+    .report-controls {
+        flex-direction: column; /* Stack controls vertically */
+        padding: 15px;
+        gap: 10px;
+        align-items: stretch; /* Stretch items to fill width */
+    }
+
+    .report-controls > div {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .report-controls button#generateReportBtn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .report-output {
+        padding: 15px;
+    }
+
+    .report-output p {
+        font-size: 1em;
+    }
+
+    /* Main MIS Table (index.html) still allows scrolling if needed */
+    #misTable {
+        font-size: 0.9em;
+        min-width: 600px; /* Keep a minimum width to ensure scrolling */
+    }
+
+    #misTable th, #misTable td {
+        padding: 10px 8px;
+    }
+
+    /* --- Staff Report Table Transformation for Mobile --- */
+    /* This section completely re-arranges the staffDetailsTable */
+    .table-responsive-container {
+        /* On mobile, this container won't need overflow-x because the table will stack */
+        overflow-x: visible; /* Override previous overflow-x: auto */
+        border: none; /* Remove border from container as items will be separate */
+        background-color: transparent; /* Remove background, each row will be a card */
+        padding: 0;
+    }
+
+    #staffDetailsTable {
+        border: none; /* Remove table border */
+        width: 100%;
+        min-width: unset; /* Allow table to shrink, as it's no longer a traditional table */
+        margin-top: 0;
+    }
+
+    #staffDetailsTable thead {
+        /* Hide table header for mobile, as data-label will provide labels */
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    #staffDetailsTable tr {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6; /* Border for each 'card' (row) */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        display: block; /* Each row becomes a block-level element (like a card) */
+        margin-bottom: 15px; /* Space between each 'card' */
+        padding: 15px;
+    }
+
+    #staffDetailsTable td {
+        border: none; /* Remove cell borders */
+        display: block; /* Each cell becomes a block-level element */
+        text-align: right; /* Align value to the right */
+        padding: 8px 0; /* Adjust padding */
+        position: relative; /* For data-label pseudo-element positioning */
+        padding-left: 50%; /* Space for the data-label */
+        white-space: normal; /* Allow text to wrap within the cell */
+    }
+
+    #staffDetailsTable td::before {
+        /* Use data-label for the actual column header */
+        content: attr(data-label) ":"; /* Append a colon for clarity */
+        position: absolute;
+        left: 0;
+        width: 45%; /* Give enough space for the label */
+        padding-right: 10px;
+        white-space: nowrap; /* Keep label on one line */
+        font-weight: 600; /* Bold label */
+        color: #495057;
+        text-align: left; /* Align label to the left */
+        top: 8px; /* Vertically align with content */
+    }
+
+    /* Specific adjustment for the first column (Metric Name) within the transformed table */
+    #staffDetailsTable tbody tr td:first-child {
+        background-color: transparent; /* Remove sticky background */
+        font-weight: 600; /* Keep the metric name bold */
+        color: #007bff; /* Give it a distinct color */
+        text-align: left; /* Ensure metric name is left-aligned */
+        padding-left: 0; /* No padding-left needed as it's the main item */
+    }
+
+    #staffDetailsTable tbody tr td:first-child::before {
+        content: none; /* Hide the data-label for the first column (Metric Name) */
+    }
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    /* margin-top removed as container has it */
-}
+/* For very small screens (phones in portrait) */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
 
-table th,
-table td {
-    border: 1px solid #e0e6ed; /* Lighter border for main table */
-    padding: 12px 15px;
-    text-align: left;
-    white-space: nowrap;
-}
+    .container {
+        padding: 0 5px;
+    }
 
-table th {
-    background-color: #007bff;
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.95em;
-}
+    h1 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+    }
+    h3 {
+        font-size: 1em;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
 
-table tr:nth-child(even) {
-    background-color: #f8fafd;
-}
+    .report-controls, .report-output {
+        padding: 10px;
+    }
 
-table tr:hover {
-    background-color: #f1f5fa;
-}
+    .report-controls label {
+        font-size: 0.9em;
+    }
 
-/* Loading Spinner */
-.loading-spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 2s linear infinite;
-    margin: 50px auto;
-    display: none;
-}
+    .report-output p {
+        font-size: 0.95em;
+    }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+    #misTable {
+        font-size: 0.85em;
+        min-width: 550px;
+    }
 
-/* Error Message */
-.error-message {
-    color: #d9534f;
-    background-color: #fdd;
-    border: 1px solid #fbc;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 5px;
-    text-align: center;
-    display: none;
+    #misTable th, #misTable td {
+        padding: 8px 6px;
+    }
+
+    /* Staff Report Table adjustments for very small screens */
+    #staffDetailsTable tr {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    #staffDetailsTable td {
+        padding: 6px 0;
+        font-size: 0.9em;
+    }
+
+    #staffDetailsTable td::before {
+        width: 48%; /* Adjust label width for smaller screens */
+        font-size: 0.9em;
+        top: 6px;
+    }
+
+    .autocomplete-suggestions {
+         width: calc(100% - 10px);
+    }
 }
