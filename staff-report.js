@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // **REPLACE THIS URL** with the "Publish to web" CSV link you copied.
-    const CSV_URL = '1https://docs.google.com/spreadsheets/d/e/2PACX-1vQib5xPHilSGhwL-6Wib6ZS2VsTR5ehFZ6EmEhKOHP7l1TaXlVdKKzOeLqlLrutqIscwRKqvF6zdko_/pub?gid=1429991894&single=true&output=csv';
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQib5xPHilSGhwL-6Wib6ZS2VsTR5ehFZ6EmEhKOHP7l1TaXlVdKKzOeLqlLrutqIscwRKqvF6zdko_/pub?gid=1429991894&single=true&output=csv';
 
     const loadingSpinner = document.getElementById('loading');
     const errorMessageDiv = document.getElementById('error-message');
