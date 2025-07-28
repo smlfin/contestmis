@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS Dashboard - Staff Performance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Staff Performance Dashboard</h1>
+
+        <div class="main-page-controls">
+            <p>View company-wise aggregated reports:</p>
+            <a href="company-report.html" class="report-button">Go to Company Report</a>
+            <p>View individual staff performance reports:</p>
+            <a href="staff-report.html" class="report-button">Go to Staff Report</a>
+        </div>
+
+        <div id="loading" class="loading-spinner"></div>
+        <div id="error-message" class="error-message"></div>
+
+        <div class="table-container">
+            <table id="misTable">
+                <thead>
+                    <tr>
+                        <th>Sl No:</th>
+                        <th>COMPANY NAME</th>
+                        <th>BRANCH</th>
+                        <th>STAFF NAME</th>
+                        <th>OS AS ON 30.06.2025</th>
+                        <th>Foreign Trip Tgt</th>
+                        <th>New Cust Tgt</th>
+                        <th>Domestic Trip Tgt</th>
+                        <th>New Cust Ach July</th>
+                        <th>New Cust Ach Total</th>
+                        <th>NET GROWTH JULY</th>
+                        <th>Contest Total NET</th>
+                        <th>% of Achievement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
